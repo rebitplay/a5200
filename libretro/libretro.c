@@ -277,9 +277,9 @@ enum frame_blend_method
          uint16_t b_prev     = (color_prev      ) & 0x1F;                                             \
                                                                                                       \
          /* Mix colors */                                                                             \
-         uint16_t r_mix      = ((r_curr * (128 - persistence)) >> 7) + ((r_prev * persistence) >> 7); \
-         uint16_t g_mix      = ((g_curr * (128 - persistence)) >> 7) + ((g_prev * persistence) >> 7); \
-         uint16_t b_mix      = ((b_curr * (128 - persistence)) >> 7) + ((b_prev * persistence) >> 7); \
+         uint16_t r_mix      = ((r_curr * (128 - persistence)) + (r_prev * persistence)) >> 7;       \
+         uint16_t g_mix      = ((g_curr * (128 - persistence)) + (g_prev * persistence)) >> 7;       \
+         uint16_t b_mix      = ((b_curr * (128 - persistence)) + (b_prev * persistence)) >> 7;       \
                                                                                                       \
          /* Output colour is the maximum of the input                                                 \
           * and decayed values */                                                                     \
