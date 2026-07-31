@@ -39,7 +39,7 @@
 #  define READ_U32(x)     (*(uint32_t *) (x))
 #  define WRITE_U32(x, d) (*(uint32_t *) (x) = (d))
 #else
-#  ifdef WORDS_BIGENDIAN
+#  ifdef MSB_FIRST
 #    define READ_U32(x) (((*(unsigned char *)(x)) << 24) | ((*((unsigned char *)(x) + 1)) << 16) | \
                         ((*((unsigned char *)(x) + 2)) << 8) | ((*((unsigned char *)(x) + 3))))
 #    define WRITE_U32(x, d) \
@@ -700,7 +700,7 @@ static void pokeysnd_process_8(void *sndbuffer, int sndn)
 	register UBYTE *vol_ptr;
 
 	/* set a pointer to the whole portion of the samp_n_cnt */
-#ifdef WORDS_BIGENDIAN
+#ifdef MSB_FIRST
 	samp_cnt_w_ptr = ((UBYTE *) (&Samp_n_cnt[0]) + 3);
 #else
 	samp_cnt_w_ptr = ((UBYTE *) (&Samp_n_cnt[0]) + 1);
@@ -1061,7 +1061,7 @@ static void pokeysnd_process_8(void *sndbuffer, int sndn)
 #endif /* STEREO_SOUND */
 #endif /* CLIP_SOUND */
 
-#ifdef WORDS_BIGENDIAN
+#ifdef MSB_FIRST
 			*(Samp_n_cnt + 1) += Samp_n_max;
 #else
 			*Samp_n_cnt += Samp_n_max;
