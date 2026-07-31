@@ -23,7 +23,6 @@
 */
 
 #include "config.h"
-#include <time.h>
 
 #include "atari.h"
 #include "cpu.h"
@@ -417,7 +416,13 @@ void POKEY_Initialise(void)
 		poly17_lookup[i] = (UBYTE) (reg >> 1);
 	}
 
-	random_scanline_counter = time(NULL) % POLY17_SIZE;
+	/* The polynomial counters must come up in a fixed state. Seeding this
+	   from the wall clock made every boot of the same content produce a
+	   different RANDOM ($D20A) sequence, which desyncs netplay between
+	   peers that loaded the content in different seconds and makes any
+	   replay or regression run unreproducible. Real POKEY also powers up
+	   with its LFSRs in a defined state, so zero is no less accurate. */
+	random_scanline_counter = 0;
 }
 
 void POKEY_Frame(void)
