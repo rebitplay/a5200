@@ -396,7 +396,7 @@ void a5200_log(enum retro_log_level level, const char *format, ...)
       return;
 
    va_start(ap, format);
-   vsprintf(msg, format, ap);
+   vsnprintf(msg, sizeof(msg), format, ap);
    va_end(ap);
 
    if (log_cb)

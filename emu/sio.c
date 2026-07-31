@@ -466,7 +466,7 @@ void SIOStateRead(void)
 		ReadINT(&saved_drive_status, 1);
 		drive_status[i] = saved_drive_status;
 
-		ReadFNAME(filename);
+		ReadFNAME(filename, sizeof(filename));
 		if (filename[0] == 0)
 			continue;
 

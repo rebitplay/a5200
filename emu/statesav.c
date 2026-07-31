@@ -262,13 +262,30 @@ void SaveFNAME(const char *filename)
    SaveUBYTE((const UBYTE *)filename, namelen);
 }
 
-void ReadFNAME(char *filename)
+void ReadFNAME(char *filename, size_t size)
 {
    UWORD namelen = 0;
 
-   ReadUWORD(&namelen, 1);
-   if (namelen >= PATH_MAX_LENGTH)
+   if (!filename || size < 1)
       return;
+
+   filename[0] = 0;
+
+   ReadUWORD(&namelen, 1);
+
+   /* The name must always be consumed from the stream, even when it does not
+      fit, otherwise every subsequent read is misaligned and the rest of the
+      state is silently garbage. */
+   if ((size_t)namelen >= size)
+   {
+      UWORD i;
+      UBYTE discard;
+
+      for (i = 0; i < namelen; i++)
+         ReadUBYTE(&discard, 1);
+
+      return;
+   }
 
    ReadUBYTE((UBYTE *)filename, namelen);
    filename[namelen] = 0;

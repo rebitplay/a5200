@@ -366,6 +366,25 @@ void CART_BountyBob2(UWORD addr)
 
 static void set_bank_5200_SUPER(void)
 {
+	/* super_cart_size is the image size in KB, each bank is 32 KB */
+	int num_banks = super_cart_size >> 5;
+
+	/* super_cart_bank is restored verbatim from savestate data, so it has
+	   to be range checked here rather than only where the bank switching
+	   registers are written. An out of range index would offset cart_image
+	   arbitrarily far out of bounds, and the multiply below would be signed
+	   overflow on top of that. Note that the mask applied in
+	   access_5200SuperCart() always yields a value below num_banks, so this
+	   only ever rejects values that did not come from the hardware path. */
+	if (!cart_image || num_banks < 1) {
+		/* clear cartridge area so the 5200 will crash */
+		dFillMem(0x4000, 0, 0x8000);
+		return;
+	}
+
+	if (super_cart_bank < 0 || super_cart_bank >= num_banks)
+		super_cart_bank = 0;
+
 	CopyROM(0x4000, 0xbfff, cart_image + super_cart_bank * 0x8000);
 }
 

@@ -2,6 +2,7 @@
 #define _STATESAV_H_
 
 #include <stdint.h>
+#include <stddef.h>
 #include "atari.h"
 
 int SaveAtariState(uint8_t *data, size_t size, UBYTE SaveVerbose);
@@ -15,6 +16,6 @@ void SaveFNAME(const char *filename);
 void ReadUBYTE(UBYTE *data, int num);
 void ReadUWORD(UWORD *data, int num);
 void ReadINT(int *data, int num);
-void ReadFNAME(char *filename);
+void ReadFNAME(char *filename, size_t size);
 
 #endif
