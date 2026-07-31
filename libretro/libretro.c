@@ -61,7 +61,7 @@ static retro_audio_sample_batch_t audio_batch_cb;
 
 #define A5200_PALETTE_SIZE 256
 #define A5200_SCREEN_BUFFER_WIDTH 512
-#define A5200_SCREEN_BUFFER_HEIGHT 512
+#define A5200_SCREEN_BUFFER_HEIGHT 240
 /* Note: Maximum Atari 5200 resolution is 320x192,
  * but outputting at this resolution causes severe
  * vertical cropping in most games. A vertical
