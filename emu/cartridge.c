@@ -29,7 +29,7 @@
 
 #include <libretro.h>
 #include <string/stdstring.h>
-#include <utils/md5.h>
+#include <lrc_hash.h>
 
 #include "atari.h"
 #include "cartridge.h"
