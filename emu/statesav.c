@@ -282,7 +282,6 @@ int SaveAtariState(uint8_t *data, size_t size, UBYTE SaveVerbose)
    if (state_stream)
    {
       memstream_close(state_stream);
-      memstream_set_buffer(NULL, 0);
       state_stream = NULL;
    }
    state_stream_error = false;
@@ -291,8 +290,7 @@ int SaveAtariState(uint8_t *data, size_t size, UBYTE SaveVerbose)
       goto error;
 
    /* Open memory stream */
-   memstream_set_buffer(data, size);
-   state_stream = memstream_open(1);
+   state_stream = memstream_open(data, size, 1);
    if (!state_stream)
       goto error;
 
@@ -314,7 +312,6 @@ int SaveAtariState(uint8_t *data, size_t size, UBYTE SaveVerbose)
 
    /* Close memory stream */
    memstream_close(state_stream);
-	memstream_set_buffer(NULL, 0);
    state_stream = NULL;
 
    if (state_stream_error)
@@ -325,7 +322,6 @@ int SaveAtariState(uint8_t *data, size_t size, UBYTE SaveVerbose)
 error:
    if (state_stream)
       memstream_close(state_stream);
-   memstream_set_buffer(NULL, 0);
    state_stream       = NULL;
    state_stream_error = true;
    return FALSE;
@@ -341,14 +337,15 @@ int ReadAtariState(const uint8_t *data, size_t size)
    if (state_stream)
    {
       memstream_close(state_stream);
-      memstream_set_buffer(NULL, 0);
       state_stream = NULL;
    }
    state_stream_error = false;
 
+   if (!data || size < 1)
+      goto error;
+
    /* Open memory stream */
-   memstream_set_buffer((uint8_t*)data, size);
-   state_stream = memstream_open(0);
+   state_stream = memstream_open((uint8_t*)data, size, 0);
    if (!state_stream)
       goto error;
 
@@ -380,7 +377,6 @@ int ReadAtariState(const uint8_t *data, size_t size)
 
    /* Close memory stream */
    memstream_close(state_stream);
-	memstream_set_buffer(NULL, 0);
    state_stream = NULL;
 
    if (state_stream_error)
@@ -391,7 +387,6 @@ int ReadAtariState(const uint8_t *data, size_t size)
 error:
    if (state_stream)
       memstream_close(state_stream);
-   memstream_set_buffer(NULL, 0);
    state_stream       = NULL;
    state_stream_error = true;
    return FALSE;
