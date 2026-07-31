@@ -6,13 +6,13 @@
 
 /* Colours taken from the Atari 5200 controller:
  * > Yellow: #FFF133 */
-#define OSK_TEXT_COLOUR   ((0xFF >> 3) << 11 | (0xF1 >> 3) << 6 | (0x33 >> 3))
+#define OSK_TEXT_COLOUR   ((0xFF >> 3) << 11 | (0xF1 >> 2) << 5 | (0x33 >> 3))
 /* > Button black: #494949 */
-#define OSK_BUTTON_COLOUR ((0x49 >> 3) << 11 | (0x49 >> 3) << 6 | (0x49 >> 3))
+#define OSK_BUTTON_COLOUR ((0x49 >> 3) << 11 | (0x49 >> 2) << 5 | (0x49 >> 3))
 /* > Casing black:  #2D2D2B */
-#define OSK_FRAME_COLOUR  ((0x2D >> 3) << 11 | (0x2D >> 3) << 6 | (0x2B >> 3))
+#define OSK_FRAME_COLOUR  ((0x2D >> 3) << 11 | (0x2D >> 2) << 5 | (0x2B >> 3))
 /* > Logo silver: #F3F3F3 */
-#define OSK_CURSOR_COLOUR ((0xF3 >> 3) << 11 | (0xF3 >> 3) << 6 | (0xF3 >> 3))
+#define OSK_CURSOR_COLOUR ((0xF3 >> 3) << 11 | (0xF3 >> 2) << 5 | (0xF3 >> 3))
 /* > Background is pure black */
 #define OSK_BG_COLOUR     0
 

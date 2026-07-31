@@ -269,11 +269,11 @@ enum frame_blend_method
                                                                                                       \
          /* Unpack colours */                                                                         \
          uint16_t r_curr     = (color_curr >> 11) & 0x1F;                                             \
-         uint16_t g_curr     = (color_curr >>  6) & 0x1F;                                             \
+         uint16_t g_curr     = (color_curr >>  5) & 0x3F;                                             \
          uint16_t b_curr     = (color_curr      ) & 0x1F;                                             \
                                                                                                       \
          uint16_t r_prev     = (color_prev >> 11) & 0x1F;                                             \
-         uint16_t g_prev     = (color_prev >>  6) & 0x1F;                                             \
+         uint16_t g_prev     = (color_prev >>  5) & 0x3F;                                             \
          uint16_t b_prev     = (color_prev      ) & 0x1F;                                             \
                                                                                                       \
          /* Mix colors */                                                                             \
@@ -286,7 +286,7 @@ enum frame_blend_method
          uint16_t r_out      = (r_mix > r_curr) ? r_mix : r_curr;                                     \
          uint16_t g_out      = (g_mix > g_curr) ? g_mix : g_curr;                                     \
          uint16_t b_out      = (b_mix > b_curr) ? b_mix : b_curr;                                     \
-         uint16_t color_out  = r_out << 11 | g_out << 6 | b_out;                                      \
+         uint16_t color_out  = r_out << 11 | g_out << 5 | b_out;                                      \
                                                                                                       \
          /* Assign colour and store for next frame */                                                 \
          *(prev++)           = color_out;                                                             \
@@ -510,7 +510,7 @@ static void initialise_palette(void)
       g = (uint8_t)((a5200_palette_ntsc[i] & 0x00FF00) >>  8);
       b = (uint8_t)((a5200_palette_ntsc[i] & 0x0000FF)      );
 
-      a5200_palette_rgb565[i] = (r >> 3) << 11 | (g >> 3) << 6 | (b >> 3);
+      a5200_palette_rgb565[i] = (r >> 3) << 11 | (g >> 2) << 5 | (b >> 3);
    }
 }
 
