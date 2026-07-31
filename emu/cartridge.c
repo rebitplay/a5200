@@ -458,7 +458,7 @@ int CART_Insert(const uint8_t *data, size_t size)
 	else if (size_kb == 64) cart_info.type = CART_5200_64;
 	else if (size_kb == 128) cart_info.type = CART_5200_128;
 	else if (size_kb == 256) cart_info.type = CART_5200_256;
-	else if (size_kb == 5120) cart_info.type = CART_5200_512;
+	else if (size_kb == 512) cart_info.type = CART_5200_512;
 
 
 	/* Get md5sum of cart data and check if it matches
