@@ -242,6 +242,9 @@ void a5200_osk_init(void)
    osk_bmp        = (uint16_t*)malloc(OSK_BMP_WIDTH *
          OSK_BMP_HEIGHT * sizeof(uint16_t));
 
+   if (!osk_bmp)
+      return;
+
    /* Draw OSK bitmap */
 
    /* > Fill with background colour */
@@ -320,7 +323,8 @@ void a5200_osk_draw(uint16_t *buffer, size_t width, size_t height)
    size_t cursor_x;
    size_t cursor_y;
 
-   if ((width < OSK_BMP_WIDTH) ||
+   if (!osk_bmp ||
+       (width < OSK_BMP_WIDTH) ||
        (height < OSK_BMP_HEIGHT))
       return;
 

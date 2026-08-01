@@ -353,6 +353,14 @@ static void init_frame_blending(enum frame_blend_method blend_method)
          video_buffer_prev = (uint16_t*)malloc(A5200_VIDEO_WIDTH *
                A5200_VIDEO_HEIGHT * sizeof(uint16_t));
 
+      /* Disable blending rather than dereference a NULL buffer if the
+         allocation failed */
+      if (!video_buffer_prev)
+      {
+         blend_frames = NULL;
+         return;
+      }
+
       memset(video_buffer_prev, 0, A5200_VIDEO_WIDTH *
             A5200_VIDEO_HEIGHT * sizeof(uint16_t));
    }
