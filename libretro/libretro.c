@@ -1377,6 +1377,13 @@ void retro_get_system_av_info(struct retro_system_av_info *info)
 
 void retro_set_controller_port_device(unsigned port, unsigned device)
 {
+   /* The frontend is not bound by the port count advertised through
+      SET_CONTROLLER_INFO and may call this for any user slot. Both arrays
+      indexed below are sized A5200_NUM_PADS, so an out of range port would
+      be an out of bounds write. */
+   if (port >= A5200_NUM_PADS)
+      return;
+
    switch (device)
    {
       case RETRO_DEVICE_JOYPAD:
