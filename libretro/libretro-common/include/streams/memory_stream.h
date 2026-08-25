@@ -32,6 +32,19 @@ RETRO_BEGIN_DECLS
 
 typedef struct memstream memstream_t;
 
+#define memstream_open a5200_memstream_open
+#define memstream_close a5200_memstream_close
+#define memstream_read a5200_memstream_read
+#define memstream_write a5200_memstream_write
+#define memstream_getc a5200_memstream_getc
+#define memstream_putc a5200_memstream_putc
+#define memstream_gets a5200_memstream_gets
+#define memstream_pos a5200_memstream_pos
+#define memstream_get_size a5200_memstream_get_size
+#define memstream_rewind a5200_memstream_rewind
+#define memstream_seek a5200_memstream_seek
+#define memstream_get_ptr a5200_memstream_get_ptr
+
 memstream_t *memstream_open(uint8_t *data, uint64_t size, unsigned writing);
 
 void memstream_close(memstream_t *stream);
