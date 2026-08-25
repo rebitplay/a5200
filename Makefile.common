@@ -33,6 +33,7 @@ SOURCES_C := \
 	$(CORE_SRC_DIR)/sio.c \
 	$(CORE_SRC_DIR)/statesav.c \
 	$(CORE_SRC_DIR)/util.c \
+	$(LIBRETRO_COMM_DIR)/streams/memory_stream.c \
 
 ifneq ($(STATIC_LINKING), 1)
 	SOURCES_C += \
@@ -46,7 +47,6 @@ ifneq ($(STATIC_LINKING), 1)
 		$(LIBRETRO_COMM_DIR)/file/file_path_io.c \
 		$(LIBRETRO_COMM_DIR)/streams/file_stream.c \
 		$(LIBRETRO_COMM_DIR)/streams/file_stream_transforms.c \
-		$(LIBRETRO_COMM_DIR)/streams/memory_stream.c \
 		$(LIBRETRO_COMM_DIR)/string/stdstring.c \
 		$(LIBRETRO_COMM_DIR)/time/rtime.c \
 		$(LIBRETRO_COMM_DIR)/utils/md5.c \
